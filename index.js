@@ -2,6 +2,7 @@
 var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
+var request = require("request");
 var bcrypt = require("bcrypt");
 var passport = require("./config/ppConfig");
 var session = require("express-session");
@@ -18,14 +19,13 @@ app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public'));
 app.use(ejsLayouts);
 app.use(session({
 	secret: process.env.SESSION_SECRET_KEY,
 	resave: false,
 	saveUninitialized: true
-}));
-
-var currentStatId = 0; 
+})); 
 
 app.use(flash());
 
@@ -39,6 +39,7 @@ app.use(function(req, res, next){
 });
 
                                         //ROUTES AND PATHS
+var currentStatId;
 
 //render the sign in page
 app.get("/", function(req, res){
@@ -93,16 +94,90 @@ app.post("/sign_up", function(req, res){
 
 app.get("/landing", function(req, res){
 	var user = req.user;
-	res.render("landing", {user:user});
+	db.stat.findAll({
+		where: {userId: user.id}
+	}).then(function(stat){
+		res.render("landing", {user:user, stat:stat});
+	});
+});
+
+
+app.post("/landing", function(req, res){
+	var user = req.user;
+	//this is always using stats from id(4) ie..(jacob elder's save slot 1)
+	currentStatId = 4;
+	res.redirect("/home");
+	// db.stat.findOrCreate({
+	// 	where: {userId: user.id, savename: req.body.saveFile},
+	// 	defaults: {
+	// 		userId: user.id,
+	// 		savename: "new save slot",
+	// 		location: "tatooine",
+	// 		credits: 0,
+	// 		starships: ""
+	// 	}
+	// }).spread(function(stat, wasCreated){
+	// 	if(wasCreated){
+	// 		console.log(stat);
+	// 		passport.authenticate("local", {
+	// 		successRedirect: "/home"
+	// 		})(req, res);
+	// 	}
+	// 	else {
+	// 		console.log(stat);
+	// 		passport.authenticate("local", {
+	// 		successRedirect: "/home"
+	// 		})(req, res);
+	// 	}
+	// }).catch(function(err){
+	// 	console.log("error", "something went wrong!!!");
+	// 	res.redirect("/");
+	// });
 });
 
 app.get("/home", function(req, res){
 	var user = req.user;
+	var starShipUrl = "http://swapi.co/api/starships/9/";
 	db.stat.find({
 		where: {userId: user.id, id: currentStatId}
 	}).then(function(stat){
 			res.render("home", {user:user, stat: stat});
-			console.log(stat);
+	});
+});
+
+app.get("/tatooine", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, id: currentStatId}
+	}).then(function(stat){
+		res.render("tatooine", {user:user, stat: stat});
+	});
+});
+
+app.get("/endor", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, id: currentStatId}
+	}).then(function(stat){
+		res.render("endor", {user:user, stat: stat});
+	});
+});
+
+app.get("/hoth", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, id: currentStatId}
+	}).then(function(stat){
+		res.render("hoth", {user:user, stat: stat});
+	});
+});
+
+app.get("/kashyyyk", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, id: currentStatId}
+	}).then(function(stat){
+		res.render("kashyyyk", {user:user, stat: stat});
 	});
 });
 

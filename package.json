@@ -25,7 +25,8 @@
     "request": "^2.75.0",
     "sequelize": "^3.24.3",
     "sequelize-cli": "^2.4.0",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "swapi-node": "^0.4.0"
   },
   "devDependencies": {},
   "description": ""

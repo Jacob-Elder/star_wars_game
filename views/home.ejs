@@ -2,10 +2,29 @@
 <script>
 	$(document).ready(function(){
 	$("body").css("background-image","url('http://cdn.mysitemyway.com/etc-mysitemyway/webtreats/assets/posts/857/thumbs/tileable-classic-nebula-space-patterns-7.jpg')");
+	$(".tatooine").on("click", function(){
+		window.location = "/tatooine";
+	});
+	$(".endor").on("click", function(){
+		window.location = "/endor";
+	});
+	$(".hoth").on("click", function(){
+		window.location = "/hoth";
+	});
+	$(".kashyyyk").on("click", function(){
+		window.location = "/kashyyyk";
+	});
+	                     // Make an ajax call when a starship is clicked
+
+
+
 });
 </script>
 
+
+
 <div class="container">
+
 	<header>
 		<div class="userInfo">
 			<h2><%= user.name %></h2>
@@ -15,28 +34,64 @@
 			    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Starships
 			    <span class="caret"></span></button>
 			    <ul class="dropdown-menu">
-			      <li><a href="#">#1</a></li>
-			      <li><a href="#">#2</a></li>
-			      <li><a href="#">#3</a></li>
+			    	<!-- before listing all of the ships i need to seperate them by comma like so: starships.split(",") -->
+
+			    	<% stat.starships = stat.starships.split(","); %>
+
+			    	<% stat.starships.forEach(function(starship){ %>
+			    		<li><button type="button" id="deathStarButton" class="btn btn-info" data-toggle="modal" data-target="#deathStarInfo"><%= starship %></button></li>
+			    	<% }); %>
 			    </ul>
 		  </div>
 		
 	</header>
+	                                        <!-- DEATH STAR MODAL -->
+
+	<div id="deathStarInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="deathTitle" class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+                                                  <!-- PLANETS -->
 
 	<div class="row row1">
-		<div class="col-xs-2 col-xs-offset-5 planet planet4"></div>
+		<div class="col-xs-2 col-xs-offset-5 planet planet4">
+			<img class="planet_pic kashyyyk" src="/images/kashyyyk.png">
+		</div>
 	</div>
 
+
 	<div class="row row2">
-		<div class="col-xs-3 col-xs-offset-2 planet planet3"></div>
+		<div class="col-xs-3 col-xs-offset-2 planet planet3">
+			<img class="planet_pic hoth" src="/images/hoth.png">
+		</div>
 	</div>
 
 	<div class="row row3">
-		<div class="col-xs-4 col-xs-offset-5 planet planet2"></div>
+		<div class="col-xs-4 col-xs-offset-5 planet planet2">
+			<img class="planet_pic endor" src="/images/endor.png">
+		</div>
 	</div>
 
 	<div class="row row4">
-		<div class="col-xs-4 col-xs-offset-8 planet planet1"></div>
+		<div class="col-xs-4 col-xs-offset-8 planet planet1">
+			<img class="planet_pic tatooine" src="/images/tatooine.png">
+		</div>
 	</div>
 
 	<div class="row row5">
@@ -44,5 +99,21 @@
 		<div class="donePlanet donePlanet2"></div>
 		<div class="donePlanet donePlanet3"></div>
 	</div>
-
+<button type="button" id="deathStarButton2">ace</button>
 </div>
+
+<script>
+	console.log("death star:", $("#deathStarButton"));
+	$("#deathStarButton").on('click', function(){
+		console.log("death star clicked");
+		$.ajax({
+			url: "http://swapi.co/api/starships/9/",
+			method: 'GET',
+			success: function(result){
+			 	console.log(result);
+			 	console.log("targeting modal", $("#deathTitle"))
+         		$("#deathTitle").text(result.name);
+    		}
+    	});
+	});
+</script>
