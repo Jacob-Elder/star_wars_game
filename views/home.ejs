@@ -1,108 +1,24 @@
+<script src="/js/home.js"></script>
 
-<script>
-	$(document).ready(function(){
-	$("body").css("background-image","url('http://cdn.mysitemyway.com/etc-mysitemyway/webtreats/assets/posts/857/thumbs/tileable-classic-nebula-space-patterns-7.jpg')");
-	$(".tatooine").on("click", function(){
-		window.location = "/tatooine";
-	});
-	$(".endor").on("click", function(){
-		window.location = "/endor";
-	});
-	$(".hoth").on("click", function(){
-		window.location = "/hoth";
-	});
-	$(".kashyyyk").on("click", function(){
-		window.location = "/kashyyyk";
-	});
-	                     // Make an ajax call when a starship is clicked
-
-});
+<%- include partials/header.ejs %>
 
 
-
-</script>
-
-
-
-<div class="container">
-
-	<header>
-		<div class="userInfo">
-			<h2><%= user.name %></h2>
-			<h4>credits: <%= stat.credits %></h4>
-		</div>
-		  <div class="dropdown">
-			    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Starships
-			    <span class="caret"></span></button>
-			    <ul class="dropdown-menu">
-			    	<!-- before listing all of the ships i need to seperate them by comma like so: starships.split(",") -->
-
-			    	<% var starshipsArray = stat.starships.split(","); %>
-
-			    	<% starshipsArray.forEach(function(starship){ %>
-			    		<li><button type="button" id="<%= starship.replace(' ', '_'); %>" class="btn btn-info" data-toggle="modal" data-target="#starshipInfo"><%= starship %></button></li>
-			    	<% }); %>
-
-			    </ul>
-		  </div>
-		
-	</header>
-	                                        <!-- DEATH STAR MODAL -->
-
-	<div id="starshipInfo" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 id="starShipTitle" class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p id="costInCredits"></p>
-        <p id="starShipConsumables"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 
                                                   <!-- PLANETS -->
 
-	<div class="row row1">
-		<div class="col-xs-2 col-xs-offset-5 planet planet4">
-			<img class="planet_pic kashyyyk" src="/images/kashyyyk.png">
+<% var columnClasses = ["col-xs-3 col-xs-offset-7","col-xs-4 col-xs-offset-5","col-xs-3 col-xs-offset-2","col-xs-2 col-xs-offset-4"]; %>
+
+<% var planetSources = ["/images/kashyyyk.png","/images/hoth.png","/images/endor.png","/images/tatooine.png"]; %>
+
+<% var unfinishedPlanetsArray = stat.unfinishedplanets.split(","); %>
+
+<% for (var i = 0; i < unfinishedPlanetsArray.length; i++) { %>
+	<div class="row row<%= i %>">
+		<div class="<%= columnClasses[i % 4] %> planet planet<%= i %>">
+			<img class="planet_pic <%= unfinishedPlanetsArray[i] %>" src="<%= planetSources[i] %>">
 		</div>
 	</div>
-
-
-	<div class="row row2">
-		<div class="col-xs-3 col-xs-offset-2 planet planet3">
-			<img class="planet_pic hoth" src="/images/hoth.png">
-		</div>
-	</div>
-
-	<div class="row row3">
-		<div class="col-xs-4 col-xs-offset-5 planet planet2">
-			<img class="planet_pic endor" src="/images/endor.png">
-		</div>
-	</div>
-
-	<div class="row row4">
-		<div class="col-xs-4 col-xs-offset-8 planet planet1">
-			<img class="planet_pic tatooine" src="/images/tatooine.png">
-		</div>
-	</div>
-
-	<div class="row row5">
-		<div class="donePlanet donePlanet1"></div>
-		<div class="donePlanet donePlanet2"></div>
-		<div class="donePlanet donePlanet3"></div>
-	</div>
-</div>
+<% } %>
 
 <script>
 
@@ -119,7 +35,7 @@
     		}
     	});
 	});
-	$("#Tie_Fighter").on('click', function(){
+	$("#X-Wing").on('click', function(){
 		console.log("X-wing clicked");
 		$.ajax({
 			url: "http://swapi.co/api/starships/12/",
@@ -132,7 +48,7 @@
     		}
     	});
 	});
-		$("#Millenium_Falcon").on('click', function(){
+	$("#Millenium_Falcon").on('click', function(){
 		console.log("Millenium Falcon clicked");
 		$.ajax({
 			url: "http://swapi.co/api/starships/10/",
@@ -142,6 +58,30 @@
          		$("#starShipTitle").text(result.name);
          		$("#costInCredits").text("Cost: " + result.cost_in_credits);
          		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
+    		}
+    	});
+	});
+	$("#shop").on('click', function(){
+		console.log("shop button clicked");
+		$.ajax({
+			url: "http://swapi.co/api/starships/10/",
+			method: 'GET',
+			success: function(falcon){
+			 	console.log(falcon);
+    		}
+    	});
+    	$.ajax({
+			url: "http://swapi.co/api/starships/12/",
+			method: 'GET',
+			success: function(xwing){
+			 	console.log(xwing);
+    		}
+    	});
+    	$.ajax({
+			url: "http://swapi.co/api/starships/9/",
+			method: 'GET',
+			success: function(deathstar){
+			 	console.log(deathstar);
     		}
     	});
 	});

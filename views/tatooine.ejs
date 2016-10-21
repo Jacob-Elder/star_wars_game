@@ -1,141 +1,63 @@
-<script>
-	$(document).ready(function(){
-		$('body').css("background-image", "url('/images/tatooine_background.JPG')");
-		$('.character1').append("<img class='characterPic jawa' src='/images/jawa.png'>");
-		$('.character2').append("<img class='characterPic tusken-raider' src='/images/tusken-raider.png'>");
-		$('.character3').append("<img class='characterPic anakin' src='/images/anakin.png'>");
-		$('.character3').css("height", "240px");
-		
+<script src="/js/tatooine.js"></script>
 
-		$(".anakinQuestion2").hide();
-		$(".anakinQuestion21").hide();
-		$(".anakinResponse2").hide();
-		$(".anakinQuestion3").hide();
-
-		$('.anakin').on("click", function(){
-			$(".dialogueBox").show();
-		});
-
-		$(".anakin_yes").click(function(e){
-			$(".anakinQuestion1").hide();
-			$(".anakinResponse1").hide();
-			$(".anakinQuestion2").show();
-			$(".anakinResponse2").show();
-		});
-
-		$(".anakin_maybe").click(function(e){
-			$(".anakinQuestion1").hide();
-			$(".anakinResponse1").hide();
-			$(".anakinQuestion2").show();
-			$(".anakinResponse2").show();
-		});
-
-		$(".anakin_no").click(function(e){
-			$(".anakinQuestion1").hide();
-			$(".anakinResponse1").hide();
-			$(".anakinQuestion21").show();
-			setTimeout(function(){
-				$(".dialogueBox").hide();
-				$(".anakin").hide();
-			}, 5000);
-		});
-
-		$(".anakin_alittle").click(function(e){
-			$(".anakinQuestion2").hide();
-			$(".anakinResponse2").hide();
-			$(".anakinQuestion3").show();
-			$.ajax({
-				url: "/credits",
-				data: {amount: 10000},
-				method: "PUT"
-			}).done(function(data){
-				$("#credits").text(data.credits);
-			});
-			setTimeout(function(){
-				$(".dialogueBox").hide();
-				$(".anakin").hide();
-			}, 5000);
-		});
-
-		
-	});
-
-</script>
+<%- include partials/header.ejs %>
 
 
-<div class="container">
-
-	<header>
-		<div class="userInfo">
-			<h2><%= user.name %></h2>
-			<h4 id="credits">credits: <%= stat.credits %></h4>
-		</div>
-		  <div class="dropdown">
-			    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Starships
-			    <span class="caret"></span></button>
-			    <ul class="dropdown-menu">
-			    	<!-- before listing all of the ships i need to seperate them by comma like so: starships.split(",") -->
-
-			    	<% starshipsArray = stat.starships.split(","); %>
-
-			    	<% starshipsArray.forEach(function(starship){ %>
-			    		<li><button type="button" id="<%= starship.replace(' ', '_'); %>" class="btn btn-info" data-toggle="modal" data-target="#starshipInfo"><%= starship %></button></li>
-			    	<% }); %>
-
-			    	
-			    </ul>
-		  </div>
-		
-	</header>
-	                                        <!-- DEATH STAR MODAL -->
-
-	<div id="starshipInfo" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 id="starShipTitle" class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p id="costInCredits"></p>
-        <p id="starShipConsumables"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 
 <div class="dialogueBox dialogueBox1">
-	<div class="anakinQuestion1">
+                                        <!-- Anakin Questions -->
+	<div class="anakin anakinQuestion1">
 		<h5>Anakin: </h5>
 		<br>
 		<p>Hey You! I am Anakin Skywalker, soon to be the most powerful jedi among the republic. As such, I order you to find a creature known as Jabba the Hut and bring him to me!</p>
 	</div>
-	<div class="anakinQuestion2">
+	<div class="anakin anakinQuestion2">
 		<h5>Anakin:</h5>
 		<br>
-		<p>Excellent! I shall reward you for your loyalty. Name your price wookie.</p>
+		<p>I shall reward you for your loyalty. Name your price wookie.</p>
 	</div>
-	<div class="anakinQuestion21">
+	<div class="anakin anakinQuestion21">
 		<h5>Anakin:</h5>
 		<br>
 		<p>How dare you defy me, you stupid animal!</p>
 	</div>
-	<div class="anakinQuestion3">
+	<div class="anakin anakinQuestion3">
 		<h5>Anakin:</h5>
 		<br>
-		<p>Here is 10,000 credits for your efforts. Meet me in the Cantina when you have found him. I'll be waiting!</p>
+		<p>Here is 40,000 credits for your efforts. Meet me in the Cantina when you have found him. I'll be waiting!</p>
+	</div>
+	                                       <!-- Jawa Questions -->
+	 <div class="jawa jawaQuestion1">
+		<h5>Jawa: </h5>
+		<br>
+		<p>Check out some droids I have for sale. I've got the best prices in all of tatooine!</p>
+	</div>
+	<div class="jawa jawaQuestion2">
+		<h5>Jawa:</h5>
+		<br>
+		<p>Whoa! Dont get crazy. How much do you want?</p>
+	</div>
+	<div class="jawa jawaQuestion21">
+		<h5>Jawa:</h5>
+		<br>
+		<p>Whatever. It's your lost. You'll never find a better selection. I'll go find someone who knows quality when they see it.</p>
+	</div>
+	<div class="jawa jawaQuestion3">
+		<h5>Jawa:</h5>
+		<br>
+		<p>I'm sorry, but no. I need that money to survive!</p>
+	</div>
+	<div class="jawa jawaQuestionMoney">
+		<h5>Jawa:</h5>
+		<br>
+		<p>Take your 60,000 credits and leave me alone!!!</p>
 	</div>
 </div>
 
 <div class="dialogueBox dialogueBox2">
-	<div class="anakinResponse1">
+                                         <!-- Anakin Responses -->
+	<div class="anakin anakinResponse1">
 		<h5>Chewbacca:</h5>
 		<br>
 		<button class="btn anakin_yes">Yea Sure!</button>
@@ -146,7 +68,7 @@
 		<br>
 		<button class="btn anakin_maybe">Maybe. What's in it for me?</button>
 	</div>
-		<div class="anakinResponse2">
+		<div class="anakin anakinResponse2">
 		<h5>Chewbacca:</h5>
 		<br>
 		<button class="btn anakin_nothing">I just want to help. Is Jabba a bad guy?</button>
@@ -155,9 +77,35 @@
 		<button class="btn anakin_alot">100,000 credits or no deal.</button>
 		<br>
 		<br>
-		<button class="btn anakin_alittle">10,000 credits should get it done.</button>
+		<button class="btn anakin_alittle">40,000 credits should get it done.</button>
 	</div>
+                                          <!-- Jawa Responses -->
+	<div class="jawa jawaResponse1">
+		<h5>Chewbacca:</h5>
+		<br>
+		<button class="btn jawa_yes">No thanks, but I have some spare parts if you're intersted.</button>
+		<br>
+		<br>
+		<button class="btn jawa_no">Im not intersted in your shitty droids.</button>
+		<br>
+		<br>
+		<button class="btn jawa_maybe">Listen, I need some money and your gunna give it to me!</button>
+	</div>
+		<div class="jawa jawaResponse2">
+		<h5>Chewbacca:</h5>
+		<br>
+		<button class="btn jawa_alittle">60,000 credits</button>
+		<br>
+		<br>
+		<button class="btn jawa_alot">100,000 credits</button>
+		<br>
+		<br>
+		<button class="btn jawa_everything">Everything You got!</button>
+	</div>
+
 </div>
+
+
 
 <img class="chewy" src="images/chewbacca.png">
 

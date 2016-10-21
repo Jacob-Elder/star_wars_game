@@ -74,7 +74,8 @@ app.post("/sign_up", function(req, res){
 					savename: "save slot 1",
 					location: "tatooine",
 					credits: 0,
-					starships: "X-Wing,Millenium Falcon,Death Star"
+					starships: "X-Wing,Millenium Falcon,Death Star",
+					unfinishedplanets: "kashyyyk,hoth,endor,tatooine"
 			}).then(function(stat){
 				currentStatId = stat.id;
 			})
@@ -113,7 +114,8 @@ app.post("/landing", function(req, res){
 			savename: currentSaveFile,
 			location: "tatooine",
 			credits: 0,
-			starships: ""
+			starships: "X-Wing,Millenium Falcon,Death Star",
+			unfinishedplanets: "kashyyyk,hoth,endor,tatooine"
 		}
 	}).spread(function(stat, wasCreated){
 			console.log(stat);

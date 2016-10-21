@@ -1,0 +1,77 @@
+<div class="container">
+
+	<header>
+									   <!-- player info -->
+		<div class="userInfo">
+			<h2><%= user.name %></h2>
+			<h4 id="credits">credits: <%= stat.credits %></h4>
+		</div>
+		                               <!-- shop button -->
+		<button type="button" id="shop" class="btn btn-primary" data-toggle="modal" data-target="#shop-modal">Shop</button>
+		                             <!-- starship dropdown -->
+		  <div class="dropdown">
+			    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Starships
+			    <span class="caret"></span></button>
+			    <ul class="dropdown-menu">
+			    	<!-- before listing all of the ships i need to seperate them by comma like so: starships.split(",") -->
+
+			    	<% starshipsArray = stat.starships.split(","); %>
+
+			    	<% starshipsArray.forEach(function(starship){ %>
+			    		<li><button type="button" id="<%= starship.replace(' ', '_'); %>" class="btn btn-info" data-toggle="modal" data-target="#starshipInfo"><%= starship %></button></li>
+			    	<% }); %>
+			    </ul>
+		  </div>
+
+
+		
+	</header>
+											<!-- SHOP MODAL -->
+<div id="shop-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="starShipTitle" class="modal-title">Galactic Marketplace</h4>
+        <h5>Browse the most recent selection of starships</h5>
+      </div>
+      <div class="modal-body">
+      		<h3 class="falconTitle"></h3>
+      		<p class="falconCost"></p>
+      		<p class="faconLength"></p>
+      		<p class="falconSpeed"></p>
+      		<p class="falconConsumables"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+	                                        <!-- STARSHIP MODAL -->
+
+	<div id="starshipInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="starShipTitle" class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p id="costInCredits"></p>
+        <p id="starShipConsumables"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

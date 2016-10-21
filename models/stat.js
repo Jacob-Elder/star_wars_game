@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     savename: DataTypes.STRING,
     location: DataTypes.STRING,
     credits: DataTypes.INTEGER,
-    starships: DataTypes.TEXT
+    starships: DataTypes.TEXT,
+    unfinishedplanets: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
