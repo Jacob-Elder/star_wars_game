@@ -74,7 +74,7 @@ app.post("/sign_up", function(req, res){
 					savename: "save slot 1",
 					location: "tatooine",
 					credits: 0,
-					starships: ""
+					starships: "X-Wing,Millenium Falcon,Death Star"
 			}).then(function(stat){
 				currentStatId = stat.id;
 			})
@@ -101,56 +101,60 @@ app.get("/landing", function(req, res){
 	});
 });
 
-
+var currentSaveFile;
 app.post("/landing", function(req, res){
 	var user = req.user;
-	//this is always using stats from id(4) ie..(jacob elder's save slot 1)
-	currentStatId = 4;
-	res.redirect("/home");
-	// db.stat.findOrCreate({
-	// 	where: {userId: user.id, savename: req.body.saveFile},
-	// 	defaults: {
-	// 		userId: user.id,
-	// 		savename: "new save slot",
-	// 		location: "tatooine",
-	// 		credits: 0,
-	// 		starships: ""
-	// 	}
-	// }).spread(function(stat, wasCreated){
-	// 	if(wasCreated){
-	// 		console.log(stat);
-	// 		passport.authenticate("local", {
-	// 		successRedirect: "/home"
-	// 		})(req, res);
-	// 	}
-	// 	else {
-	// 		console.log(stat);
-	// 		passport.authenticate("local", {
-	// 		successRedirect: "/home"
-	// 		})(req, res);
-	// 	}
-	// }).catch(function(err){
-	// 	console.log("error", "something went wrong!!!");
-	// 	res.redirect("/");
-	// });
+	currentSaveFile = req.body.saveFile;
+	console.log(currentSaveFile);
+	db.stat.findOrCreate({
+		where: {userId: user.id, savename: currentSaveFile},
+		defaults: {
+			userId: user.id,
+			savename: currentSaveFile,
+			location: "tatooine",
+			credits: 0,
+			starships: ""
+		}
+	}).spread(function(stat, wasCreated){
+			console.log(stat);
+			res.redirect("/home");
+	}).catch(function(err){
+		console.log("error", "something went wrong!!!");
+		res.redirect("/");
+	});
 });
 
 app.get("/home", function(req, res){
 	var user = req.user;
-	var starShipUrl = "http://swapi.co/api/starships/9/";
 	db.stat.find({
-		where: {userId: user.id, id: currentStatId}
+		where: {userId: user.id, savename: currentSaveFile}
 	}).then(function(stat){
 			res.render("home", {user:user, stat: stat});
+	});
+});
+
+app.put("/credits", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, savename: currentSaveFile},
+	}).then(function(stat){
+		console.log(stat);
+		if (stat) {
+			stat.updateAttributes({
+				credits: stat.credits += parseInt(req.body.amount)
+			}).then(function(updatedStat){
+				res.send(updatedStat);
+			});
+		}
 	});
 });
 
 app.get("/tatooine", function(req, res){
 	var user = req.user;
 	db.stat.find({
-		where: {userId: user.id, id: currentStatId}
+		where: {userId: user.id, savename: currentSaveFile}
 	}).then(function(stat){
-		res.render("tatooine", {user:user, stat: stat});
+			res.render("tatooine", {user:user, stat: stat});
 	});
 });
 
@@ -159,7 +163,7 @@ app.get("/endor", function(req, res){
 	db.stat.find({
 		where: {userId: user.id, id: currentStatId}
 	}).then(function(stat){
-		res.render("endor", {user:user, stat: stat});
+		res.render("endor", {user:user, stat:stat});
 	});
 });
 

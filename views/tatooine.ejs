@@ -1,32 +1,162 @@
 <script>
 	$(document).ready(function(){
 		$('body').css("background-image", "url('/images/tatooine_background.JPG')");
+		$('.character1').append("<img class='characterPic jawa' src='/images/jawa.png'>");
+		$('.character2').append("<img class='characterPic tusken-raider' src='/images/tusken-raider.png'>");
+		$('.character3').append("<img class='characterPic anakin' src='/images/anakin.png'>");
+		$('.character3').css("height", "240px");
+		
 
+		$(".anakinQuestion2").hide();
+		$(".anakinQuestion21").hide();
+		$(".anakinResponse2").hide();
+		$(".anakinQuestion3").hide();
+
+		$('.anakin').on("click", function(){
+			$(".dialogueBox").show();
+		});
+
+		$(".anakin_yes").click(function(e){
+			$(".anakinQuestion1").hide();
+			$(".anakinResponse1").hide();
+			$(".anakinQuestion2").show();
+			$(".anakinResponse2").show();
+		});
+
+		$(".anakin_maybe").click(function(e){
+			$(".anakinQuestion1").hide();
+			$(".anakinResponse1").hide();
+			$(".anakinQuestion2").show();
+			$(".anakinResponse2").show();
+		});
+
+		$(".anakin_no").click(function(e){
+			$(".anakinQuestion1").hide();
+			$(".anakinResponse1").hide();
+			$(".anakinQuestion21").show();
+			setTimeout(function(){
+				$(".dialogueBox").hide();
+				$(".anakin").hide();
+			}, 5000);
+		});
+
+		$(".anakin_alittle").click(function(e){
+			$(".anakinQuestion2").hide();
+			$(".anakinResponse2").hide();
+			$(".anakinQuestion3").show();
+			$.ajax({
+				url: "/credits",
+				data: {amount: 10000},
+				method: "PUT"
+			}).done(function(data){
+				$("#credits").text(data.credits);
+			});
+			setTimeout(function(){
+				$(".dialogueBox").hide();
+				$(".anakin").hide();
+			}, 5000);
+		});
+
+		
 	});
+
 </script>
 
 
-
 <div class="container">
+
 	<header>
 		<div class="userInfo">
-			<h2>user name</h2>
-			<h4>credits:</h4>
+			<h2><%= user.name %></h2>
+			<h4 id="credits">credits: <%= stat.credits %></h4>
 		</div>
 		  <div class="dropdown">
-			    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Starships
+			    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Starships
 			    <span class="caret"></span></button>
 			    <ul class="dropdown-menu">
-
 			    	<!-- before listing all of the ships i need to seperate them by comma like so: starships.split(",") -->
 
-			      <li><a href="#">#1</a></li>
-			      <li><a href="#">#2</a></li>
-			      <li><a href="#">#3</a></li>
+			    	<% starshipsArray = stat.starships.split(","); %>
+
+			    	<% starshipsArray.forEach(function(starship){ %>
+			    		<li><button type="button" id="<%= starship.replace(' ', '_'); %>" class="btn btn-info" data-toggle="modal" data-target="#starshipInfo"><%= starship %></button></li>
+			    	<% }); %>
+
+			    	
 			    </ul>
 		  </div>
 		
 	</header>
+	                                        <!-- DEATH STAR MODAL -->
+
+	<div id="starshipInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 id="starShipTitle" class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p id="costInCredits"></p>
+        <p id="starShipConsumables"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="dialogueBox dialogueBox1">
+	<div class="anakinQuestion1">
+		<h5>Anakin: </h5>
+		<br>
+		<p>Hey You! I am Anakin Skywalker, soon to be the most powerful jedi among the republic. As such, I order you to find a creature known as Jabba the Hut and bring him to me!</p>
+	</div>
+	<div class="anakinQuestion2">
+		<h5>Anakin:</h5>
+		<br>
+		<p>Excellent! I shall reward you for your loyalty. Name your price wookie.</p>
+	</div>
+	<div class="anakinQuestion21">
+		<h5>Anakin:</h5>
+		<br>
+		<p>How dare you defy me, you stupid animal!</p>
+	</div>
+	<div class="anakinQuestion3">
+		<h5>Anakin:</h5>
+		<br>
+		<p>Here is 10,000 credits for your efforts. Meet me in the Cantina when you have found him. I'll be waiting!</p>
+	</div>
+</div>
+
+<div class="dialogueBox dialogueBox2">
+	<div class="anakinResponse1">
+		<h5>Chewbacca:</h5>
+		<br>
+		<button class="btn anakin_yes">Yea Sure!</button>
+		<br>
+		<br>
+		<button class="btn anakin_no">Nah dawg.</button>
+		<br>
+		<br>
+		<button class="btn anakin_maybe">Maybe. What's in it for me?</button>
+	</div>
+		<div class="anakinResponse2">
+		<h5>Chewbacca:</h5>
+		<br>
+		<button class="btn anakin_nothing">I just want to help. Is Jabba a bad guy?</button>
+		<br>
+		<br>
+		<button class="btn anakin_alot">100,000 credits or no deal.</button>
+		<br>
+		<br>
+		<button class="btn anakin_alittle">10,000 credits should get it done.</button>
+	</div>
 </div>
 
 <img class="chewy" src="images/chewbacca.png">
@@ -34,3 +164,46 @@
 <div class="character character1"></div>
 <div class="character character2"></div>
 <div class="character character3"></div>
+
+<script>
+
+	$("#Death_Star").on('click', function(){
+		console.log("death star clicked");
+		$.ajax({
+			url: "http://swapi.co/api/starships/9/",
+			method: 'GET',
+			success: function(result){
+			 	console.log(result);
+         		$("#starShipTitle").text(result.name);
+         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
+         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
+    		}
+    	});
+	});
+	$("#Tie_Fighter").on('click', function(){
+		console.log("X-wing clicked");
+		$.ajax({
+			url: "http://swapi.co/api/starships/12/",
+			method: 'GET',
+			success: function(result){
+			 	console.log(result);
+         		$("#starShipTitle").text(result.name);
+         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
+         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
+    		}
+    	});
+	});
+		$("#Millenium_Falcon").on('click', function(){
+		console.log("Millenium Falcon clicked");
+		$.ajax({
+			url: "http://swapi.co/api/starships/10/",
+			method: 'GET',
+			success: function(result){
+			 	console.log(result);
+         		$("#starShipTitle").text(result.name);
+         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
+         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
+    		}
+    	});
+	});
+</script>

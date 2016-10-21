@@ -16,9 +16,9 @@
         body {
             /*background properties*/
             background-color: black;
-            background-image: url("http://wallpapercave.com/wp/ItmVuT6.jpg");
+            background: url("http://wallpapercave.com/wp/ItmVuT6.jpg") no-repeat center center fixed;
             background-size: cover;
-            background-repeat: no-repeat;
+            /*background-repeat: no-repeat;*/
         }
         /****************************************************
         CSS that only applies to the sign in and sign up page
@@ -95,14 +95,37 @@
 
         }
 
+        .dialogueBox {
+            height: 250px;
+            width: 30%;
+            text-align: center;
+            display: none;
+        }
+
+        .dialogueBox1 {
+            background-color: red;
+            float: left;
+            margin-right: 14%;
+            margin-left: 10%;
+            border-radius: 30% 30% 30% 0;
+        }
+
+
+        .dialogueBox2 {
+           background-color: green;
+           float: left;
+           border-radius: 30% 30% 0 30%;
+        }
+
+
         /* .character refers to each of the 3 characters */
         .character {
             display: inline-block;
             height: 220px;
             width: 170px;
-            background-color: blue;
+            /*background-color: blue;*/
             position: absolute;
-            bottom: 0;
+            bottom: 5px;
         }
 
         .character1 {
@@ -115,6 +138,11 @@
 
         .character3 {
             left:440px;
+        }
+
+        .characterPic {
+            height: 100%;
+            width:100%;
         }
 
     </style>

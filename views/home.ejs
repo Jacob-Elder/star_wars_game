@@ -16,9 +16,10 @@
 	});
 	                     // Make an ajax call when a starship is clicked
 
-
-
 });
+
+
+
 </script>
 
 
@@ -31,33 +32,35 @@
 			<h4>credits: <%= stat.credits %></h4>
 		</div>
 		  <div class="dropdown">
-			    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Starships
+			    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Starships
 			    <span class="caret"></span></button>
 			    <ul class="dropdown-menu">
 			    	<!-- before listing all of the ships i need to seperate them by comma like so: starships.split(",") -->
 
-			    	<% stat.starships = stat.starships.split(","); %>
+			    	<% var starshipsArray = stat.starships.split(","); %>
 
-			    	<% stat.starships.forEach(function(starship){ %>
-			    		<li><button type="button" id="deathStarButton" class="btn btn-info" data-toggle="modal" data-target="#deathStarInfo"><%= starship %></button></li>
+			    	<% starshipsArray.forEach(function(starship){ %>
+			    		<li><button type="button" id="<%= starship.replace(' ', '_'); %>" class="btn btn-info" data-toggle="modal" data-target="#starshipInfo"><%= starship %></button></li>
 			    	<% }); %>
+
 			    </ul>
 		  </div>
 		
 	</header>
 	                                        <!-- DEATH STAR MODAL -->
 
-	<div id="deathStarInfo" class="modal fade" role="dialog">
+	<div id="starshipInfo" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 id="deathTitle" class="modal-title">Modal Header</h4>
+        <h4 id="starShipTitle" class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <p id="costInCredits"></p>
+        <p id="starShipConsumables"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -99,20 +102,46 @@
 		<div class="donePlanet donePlanet2"></div>
 		<div class="donePlanet donePlanet3"></div>
 	</div>
-<button type="button" id="deathStarButton2">ace</button>
 </div>
 
 <script>
-	console.log("death star:", $("#deathStarButton"));
-	$("#deathStarButton").on('click', function(){
+
+	$("#Death_Star").on('click', function(){
 		console.log("death star clicked");
 		$.ajax({
 			url: "http://swapi.co/api/starships/9/",
 			method: 'GET',
 			success: function(result){
 			 	console.log(result);
-			 	console.log("targeting modal", $("#deathTitle"))
-         		$("#deathTitle").text(result.name);
+         		$("#starShipTitle").text(result.name);
+         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
+         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
+    		}
+    	});
+	});
+	$("#Tie_Fighter").on('click', function(){
+		console.log("X-wing clicked");
+		$.ajax({
+			url: "http://swapi.co/api/starships/12/",
+			method: 'GET',
+			success: function(result){
+			 	console.log(result);
+         		$("#starShipTitle").text(result.name);
+         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
+         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
+    		}
+    	});
+	});
+		$("#Millenium_Falcon").on('click', function(){
+		console.log("Millenium Falcon clicked");
+		$.ajax({
+			url: "http://swapi.co/api/starships/10/",
+			method: 'GET',
+			success: function(result){
+			 	console.log(result);
+         		$("#starShipTitle").text(result.name);
+         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
+         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
     		}
     	});
 	});
