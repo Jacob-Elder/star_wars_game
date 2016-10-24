@@ -53,7 +53,7 @@ $(document).ready(function(){
 				window.location = "/hoth";
 			}
 			else {
-				alert("You need an X-Wing to make it to Endor!");
+				alert("You need an X-Wing to make it to Hoth!");
 			}
 		});
 	});
