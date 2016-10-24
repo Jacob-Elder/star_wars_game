@@ -18,6 +18,7 @@
 		$(".jawaQuestion21").hide();
 		$(".jawaResponse2").hide();
 		$(".jawaQuestion3").hide();
+		$(".jawaQuestionMoney").hide();
 
 		$('.anakinPic').on("click", function(){
 			$(".dialogueBox").show();
@@ -126,6 +127,7 @@
 			});
 			setTimeout(function(){
 				$(".jawaQuestion3").hide();
+				$(".jawaQuestionMoney").hide();
 				$(".dialogueBox").hide();
 				$(".jawaPic").hide();
 			}, 5000);

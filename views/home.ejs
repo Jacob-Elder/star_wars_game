@@ -4,6 +4,8 @@
 
 
 
+
+
                                                   <!-- PLANETS -->
 
 <% var columnClasses = ["col-xs-3 col-xs-offset-7","col-xs-4 col-xs-offset-5","col-xs-3 col-xs-offset-2","col-xs-2 col-xs-offset-4"]; %>
@@ -16,73 +18,13 @@
 	<div class="row row<%= i %>">
 		<div class="<%= columnClasses[i % 4] %> planet planet<%= i %>">
 			<img class="planet_pic <%= unfinishedPlanetsArray[i] %>" src="<%= planetSources[i] %>">
+			<h4 style="color:white"><%= unfinishedPlanetsArray[i] %></h4>
 		</div>
 	</div>
 <% } %>
 
-<script>
+<script src="/js/starships.js"></script>
 
-	$("#Death_Star").on('click', function(){
-		console.log("death star clicked");
-		$.ajax({
-			url: "http://swapi.co/api/starships/9/",
-			method: 'GET',
-			success: function(result){
-			 	console.log(result);
-         		$("#starShipTitle").text(result.name);
-         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
-         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
-    		}
-    	});
-	});
-	$("#X-Wing").on('click', function(){
-		console.log("X-wing clicked");
-		$.ajax({
-			url: "http://swapi.co/api/starships/12/",
-			method: 'GET',
-			success: function(result){
-			 	console.log(result);
-         		$("#starShipTitle").text(result.name);
-         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
-         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
-    		}
-    	});
-	});
-	$("#Millenium_Falcon").on('click', function(){
-		console.log("Millenium Falcon clicked");
-		$.ajax({
-			url: "http://swapi.co/api/starships/10/",
-			method: 'GET',
-			success: function(result){
-			 	console.log(result);
-         		$("#starShipTitle").text(result.name);
-         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
-         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
-    		}
-    	});
-	});
-	$("#shop").on('click', function(){
-		console.log("shop button clicked");
-		$.ajax({
-			url: "http://swapi.co/api/starships/10/",
-			method: 'GET',
-			success: function(falcon){
-			 	console.log(falcon);
-    		}
-    	});
-    	$.ajax({
-			url: "http://swapi.co/api/starships/12/",
-			method: 'GET',
-			success: function(xwing){
-			 	console.log(xwing);
-    		}
-    	});
-    	$.ajax({
-			url: "http://swapi.co/api/starships/9/",
-			method: 'GET',
-			success: function(deathstar){
-			 	console.log(deathstar);
-    		}
-    	});
-	});
-</script>
+<script src="/js/shop.js"></script>
+
+

@@ -6,6 +6,8 @@ var request = require("request");
 var bcrypt = require("bcrypt");
 var passport = require("./config/ppConfig");
 var session = require("express-session");
+var cookieParser = require("cookie-parser");
+var localStorage = require('localStorage'),myStarships = { foo: 'bar', baz: 'quux' };
 var isLoggedIn = require("./middleware/isLoggedIn");
 var flash = require("connect-flash");
 require("dotenv").config();
@@ -38,6 +40,8 @@ app.use(function(req, res, next){
 	next();
 });
 
+
+
                                         //ROUTES AND PATHS
 var currentStatId;
 
@@ -49,7 +53,7 @@ app.get("/", function(req, res){
 //sign the user in if info is correct
 app.post('/', passport.authenticate("local", {
 	successRedirect: "/landing",
-	failureRedirect: "/log_in",
+	failureRedirect: "/",
 	failureFlash: "Invalid credentials",
 	successFlash: "You have successfully logged in"
 }));
@@ -74,7 +78,7 @@ app.post("/sign_up", function(req, res){
 					savename: "save slot 1",
 					location: "tatooine",
 					credits: 0,
-					starships: "X-Wing,Millenium Falcon,Death Star",
+					starships: "",
 					unfinishedplanets: "kashyyyk,hoth,endor,tatooine"
 			}).then(function(stat){
 				currentStatId = stat.id;
@@ -84,11 +88,12 @@ app.post("/sign_up", function(req, res){
 			})(req, res);
 		}
 		else {
+			req.flash("error", "Email exists already");
 			console.log("error", "Email exists already");
 			res.redirect("/");
 		}
 	}).catch(function(err){
-		console.log("error", "An error occurred: " + err.message);
+		req.flash("error", "An error occurred: " + err.message);
 		res.redirect("/");
 	});
 });
@@ -114,11 +119,12 @@ app.post("/landing", function(req, res){
 			savename: currentSaveFile,
 			location: "tatooine",
 			credits: 0,
-			starships: "X-Wing,Millenium Falcon,Death Star",
+			starships: "",
 			unfinishedplanets: "kashyyyk,hoth,endor,tatooine"
 		}
 	}).spread(function(stat, wasCreated){
 			console.log(stat);
+			localStorage.setItem('myKey', "random!");
 			res.redirect("/home");
 	}).catch(function(err){
 		console.log("error", "something went wrong!!!");
@@ -131,7 +137,35 @@ app.get("/home", function(req, res){
 	db.stat.find({
 		where: {userId: user.id, savename: currentSaveFile}
 	}).then(function(stat){
-			res.render("home", {user:user, stat: stat});
+		res.render("home", {user:user, stat: stat});
+	});
+});
+
+app.put("/starships", function(req,res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, savename: currentSaveFile}
+	}).then(function(stat){
+		stat.updateAttributes({
+			starships: stat.starships += ("," + req.body.ship)
+		}).then(function(updatedStat){
+			res.send(updatedStat);
+		});
+	});
+});
+
+app.put("/planets", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, savename: currentSaveFile}
+	}).then(function(stat){
+		var array = stat.unfinishedplanets.split(",");
+		var searchTerm = req.body.finishedPlanet;
+		stat.updateAttributes({
+			unfinishedplanets: stat.unfinishedplanets = (array.filter(function(i){return i !== searchTerm})).join(",")
+		}).then(function(updatedStat){
+			res.send(updatedStat);
+		})
 	});
 });
 
@@ -144,6 +178,22 @@ app.put("/credits", function(req, res){
 		if (stat) {
 			stat.updateAttributes({
 				credits: stat.credits += parseInt(req.body.amount)
+			}).then(function(updatedStat){
+				res.send(updatedStat);
+			});
+		}
+	});
+});
+
+app.put("/subtractcredits", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, savename: currentSaveFile},
+	}).then(function(stat){
+		console.log(stat);
+		if (stat) {
+			stat.updateAttributes({
+				credits: stat.credits -= parseInt(req.body.amount)
 			}).then(function(updatedStat){
 				res.send(updatedStat);
 			});

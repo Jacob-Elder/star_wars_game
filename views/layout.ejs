@@ -29,6 +29,14 @@
     		color: white;
     		font-family: Andale Mono,Times New Roman;
     	}
+
+        input[type="radio"]:checked+span {
+            color: green;
+        }
+
+        input[type="radio"]+span {
+            font-size: 1.5em;
+        }
         /****************************************************
         CSS that applies to the header of each page 
         *****************************************************/
@@ -39,18 +47,21 @@
         }
 
         .dropdown {
-            float: right;
+            position: absolute;
+            top:20px;
+            right:98px;
         }
 
         #shop {
-            float: right;
-            margin-left: 5%;
+            position: absolute;
+            top:20px;
+            right:20px;
         }
         /****************************************************
         CSS that only applies to the planets on the /home page
         *****************************************************/
         .planet {
-            background-color: green;
+            /*background-color: green;*/
             border-radius: 100%;
         }
 
@@ -61,22 +72,22 @@
 
         .planet3 {
             height: 250px;
-            width: 250px;
+            width: 275px;
         }
 
         .planet2 {
             height: 180px;
-            width: 180px;
+            width: 200px;
         }
 
         .planet1 {
             height: 120px;
-            width: 120px;
+            width: 150px;
         }
 
         .planet0 {
             height: 75px;
-            width: 75px;
+            width: 100px;
         }
 
         .donePlanet {
@@ -149,12 +160,20 @@
             width:100%;
         }
 
+        /*********************************************
+        CSS for the header modals
+        ****************************************/
+        #starshipPic {
+            height: 200px;
+            width: 200px;
+        }
+
     </style>
 
 </head>
 <body>
 
-
+<% include partials/alerts %>
 <%- body %>
 
 </body>

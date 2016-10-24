@@ -1,12 +1,14 @@
-<h1>Welcome, <%= user.name %></h1>
+<div style="color:white" class="text-center">
+	<h1>Welcome, <%= user.name %></h1>
 
-<h4>Here are your saved files</h4>
+	<h3>Here are your saved files</h3>
 
-<p></p>
+	<p></p>
 
-<form action="/landing" method="POST">
-	<input type="radio" name="saveFile" value="save slot 1" checked> Save Slot 1<br>
-	<input type="radio" name="saveFile" value="save slot 2"> Save Slot 2<br>
-	<input type="radio" name="saveFile" value="save slot 3"> Save Slot 3<br>
-	<input type="submit" value="Play!">
-</form>
+	<form action="/landing" method="POST">
+		<input type="radio" name="saveFile" value="save slot 1" checked><span>Save Slot 1</span><br>
+		<input type="radio" name="saveFile" value="save slot 2"><span>Save Slot 2</span><br>
+		<input type="radio" name="saveFile" value="save slot 3"><span>Save Slot 3</span><br>
+		<input class="btn btn-primary" type="submit" value="Play!">
+	</form>
+</div>
