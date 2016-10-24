@@ -40,6 +40,39 @@ $(".buyFalcon").click(function(e){
 	}); 
 });
 
+$("#sellFalcon").click(function(e){
+	console.log("sell falcon clicked");
+	$.ajax({
+		url: "/subtractcredits",
+		data: {},
+		method: "PUT"
+	}).done(function(data){
+		var userStarships = data.starships;
+		if (userStarships.indexOf("Millenium Falcon") !== -1) {
+			$.ajax({
+				url: "/credits",
+				data: {amount:100000},
+				method: "PUT"
+			}).done(function(data){
+				$("#credits").text("credits: " + data.credits);
+				$(".yourCredits").text("Your credits: " + data.credits);
+			})
+			$.ajax({
+				url: "/starships",
+				data: {},
+				method: "DELETE"
+			}).done(function(data){
+				$("#credits").text("credits: " + data.credits);
+				$(".yourCredits").text("Your credits: " + data.credits);
+				location.reload();
+			})
+		}
+		else {
+			console.log("You dont own the Millenium Falcon.");
+		}
+	})
+})
+
 $(".buyxwing").click(function(e){ 
 	$.ajax({ 
 		url: "/subtractcredits",

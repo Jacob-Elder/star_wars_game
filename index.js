@@ -165,7 +165,22 @@ app.put("/planets", function(req, res){
 			unfinishedplanets: stat.unfinishedplanets = (array.filter(function(i){return i !== searchTerm})).join(",")
 		}).then(function(updatedStat){
 			res.send(updatedStat);
-		})
+		});
+	});
+});
+
+app.delete("/starships", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, savename: currentSaveFile}
+	}).then(function(stat){
+		var array = stat.starships.split(",");
+		var searchTerm = "Millenium Falcon";
+		stat.updateAttributes({
+			starships: stat.starships = (array.filter(function(i){return i !== searchTerm})).join(",")
+		}).then(function(updatedStat){
+			res.send(updatedStat);
+		});
 	});
 });
 

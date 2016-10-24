@@ -63,7 +63,7 @@
 		<button class="btn anakin_yes">Yea Sure!</button>
 		<br>
 		<br>
-		<button class="btn anakin_no">Nah dawg.</button>
+		<button class="btn anakin_no">No, I'm busy.</button>
 		<br>
 		<br>
 		<button class="btn anakin_maybe">Maybe. What's in it for me?</button>
@@ -83,13 +83,13 @@
 	<div class="jawa jawaResponse1">
 		<h5>Chewbacca:</h5>
 		<br>
-		<button class="btn jawa_yes">No thanks, but I have some spare parts if you're intersted.</button>
+		<button class="btn jawa_yes">No thanks, but I have some spare parts<br> if you're intersted.</button>
 		<br>
 		<br>
-		<button class="btn jawa_no">Im not intersted in your shitty droids.</button>
+		<button class="btn jawa_no">Im not intersted in your droids.</button>
 		<br>
 		<br>
-		<button class="btn jawa_maybe">Listen, I need some money and your gunna give it to me!</button>
+		<button class="btn jawa_maybe">Listen, I need some money and you're<br> gunna give it to me!</button>
 	</div>
 		<div class="jawa jawaResponse2">
 		<h5>Chewbacca:</h5>
@@ -113,45 +113,6 @@
 <div class="character character2"></div>
 <div class="character character3"></div>
 
-<script>
+<script src="/js/starships.js"></script>
 
-	$("#Death_Star").on('click', function(){
-		console.log("death star clicked");
-		$.ajax({
-			url: "http://swapi.co/api/starships/9/",
-			method: 'GET',
-			success: function(result){
-			 	console.log(result);
-         		$("#starShipTitle").text(result.name);
-         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
-         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
-    		}
-    	});
-	});
-	$("#Tie_Fighter").on('click', function(){
-		console.log("X-wing clicked");
-		$.ajax({
-			url: "http://swapi.co/api/starships/12/",
-			method: 'GET',
-			success: function(result){
-			 	console.log(result);
-         		$("#starShipTitle").text(result.name);
-         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
-         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
-    		}
-    	});
-	});
-		$("#Millenium_Falcon").on('click', function(){
-		console.log("Millenium Falcon clicked");
-		$.ajax({
-			url: "http://swapi.co/api/starships/10/",
-			method: 'GET',
-			success: function(result){
-			 	console.log(result);
-         		$("#starShipTitle").text(result.name);
-         		$("#costInCredits").text("Cost: " + result.cost_in_credits);
-         		$("#starShipConsumables").text("Stores enough supplies to survive for " + result.consumables);
-    		}
-    	});
-	});
-</script>
+<script src="/js/shop.js"></script>
