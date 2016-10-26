@@ -1,7 +1,7 @@
 $("#Death_Star").on('click', function(){
 		console.log("death star clicked");
 		$.ajax({
-			url: "http://swapi.co/api/starships/9/",
+			url: "https://swapi.co/api/starships/9/",
 			method: 'GET',
 			success: function(result){
 			 	console.log(result);
@@ -17,7 +17,7 @@ $("#Death_Star").on('click', function(){
 	$("#X-Wing").on('click', function(){
 		console.log("X-wing clicked");
 		$.ajax({
-			url: "http://swapi.co/api/starships/12/",
+			url: "https://swapi.co/api/starships/12/",
 			method: 'GET',
 			success: function(result){
 			 	console.log(result);
@@ -33,7 +33,7 @@ $("#Death_Star").on('click', function(){
 	$("#Millenium_Falcon").on('click', function(){
 		console.log("Millenium Falcon clicked");
 		$.ajax({
-			url: "http://swapi.co/api/starships/10/",
+			url: "https://swapi.co/api/starships/10/",
 			method: 'GET',
 			success: function(result){
 			 	console.log(result);
