@@ -46,10 +46,12 @@ $("#Death_Star").on('click', function(){
     		}
     	});
 	});
+
+	                         // Display All Ships When you click on the 'shop' button
 	$("#shop").on('click', function(){
 		console.log("shop button clicked");
 		$.ajax({
-			url: "http://swapi.co/api/starships/10/",
+			url: "https://swapi.co/api/starships/10/",
 			method: 'GET',
 			success: function(falcon){
 			 	console.log(falcon);
@@ -61,7 +63,7 @@ $("#Death_Star").on('click', function(){
     		}
     	});
     	$.ajax({
-			url: "http://swapi.co/api/starships/12/",
+			url: "https://swapi.co/api/starships/12/",
 			method: 'GET',
 			success: function(xwing){
 			 	console.log(xwing);
@@ -73,7 +75,7 @@ $("#Death_Star").on('click', function(){
     		}
     	});
     	$.ajax({
-			url: "http://swapi.co/api/starships/9/",
+			url: "https://swapi.co/api/starships/9/",
 			method: 'GET',
 			success: function(deathstar){
 			 	console.log(deathstar);
