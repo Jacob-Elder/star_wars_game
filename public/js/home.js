@@ -37,7 +37,7 @@ $(document).ready(function(){
 	});
 	$(".hoth").on("click", function(){
 		$.ajax({
-			url: "/starships",
+			url: "/subtractcredits",
 			data: {},
 			method: "PUT"
 		}).done(function(data){
@@ -59,7 +59,7 @@ $(document).ready(function(){
 	});
 	$(".kashyyyk").on("click", function(){
 		$.ajax({
-			url: "/starships",
+			url: "/subtractcredits",
 			data: {},
 			method: "PUT"
 		}).done(function(data){
