@@ -1,9 +1,8 @@
 $(document).ready(function(){
 
 	$.ajax({ 
-		url: "/subtractcredits",
-		data: {amount:0}, 
-		method: "PUT"
+		url: "/getStats",
+		method: "GET"
 	}).done(function(data){ 
 		$("#credits").text("credits: " + data.credits);
 		$(".yourCredits").text("Your credits: " + data.credits);
@@ -15,9 +14,8 @@ $(document).ready(function(){
 	});
 	$(".endor").on("click", function(){
 		$.ajax({
-			url: "/starships",
-			data: {},
-			method: "PUT"
+			url: "/getStats",
+			method: "GET"
 		}).done(function(data){
 			var userStarships = data.starships;
 			if(userStarships.indexOf("Millenium Falcon") !== -1){
@@ -37,9 +35,8 @@ $(document).ready(function(){
 	});
 	$(".hoth").on("click", function(){
 		$.ajax({
-			url: "/subtractcredits",
-			data: {},
-			method: "PUT"
+			url: "/getStats",
+			method: "GET"
 		}).done(function(data){
 			var userStarships = data.starships;
 			if(userStarships.indexOf("X-Wing") !== -1){
@@ -59,9 +56,8 @@ $(document).ready(function(){
 	});
 	$(".kashyyyk").on("click", function(){
 		$.ajax({
-			url: "/subtractcredits",
-			data: {},
-			method: "PUT"
+			url: "/getStats",
+			method: "GET"
 		}).done(function(data){
 			var userStarships = data.starships;
 			if(userStarships.indexOf("Death Star") !== -1){

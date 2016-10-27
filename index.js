@@ -98,6 +98,7 @@ app.post("/sign_up", function(req, res){
 	});
 });
 
+//show the users saved files
 app.get("/landing", function(req, res){
 	var user = req.user;
 	db.stat.findAll({
@@ -107,6 +108,7 @@ app.get("/landing", function(req, res){
 	});
 });
 
+//POST which save file the user selects
 var currentSaveFile;
 app.post("/landing", function(req, res){
 	var user = req.user;
@@ -132,6 +134,7 @@ app.post("/landing", function(req, res){
 	});
 });
 
+//render the home page
 app.get("/home", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -141,6 +144,18 @@ app.get("/home", function(req, res){
 	});
 });
 
+//route for getting the players stats
+app.get("/getStats", function(req, res){
+	var user = req.user;
+	db.stat.find({
+		where: {userId: user.id, savename: currentSaveFile}
+	}).then(function(stat){
+		res.send(stat);
+	});
+});
+
+
+//route for adding new ships that the player buys
 app.put("/starships", function(req,res){
 	var user = req.user;
 	db.stat.find({
@@ -154,6 +169,7 @@ app.put("/starships", function(req,res){
 	});
 });
 
+//route for removing planets when a user travels to the next one 
 app.put("/planets", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -169,6 +185,7 @@ app.put("/planets", function(req, res){
 	});
 });
 
+//route for deleting starships when the user sells them
 app.delete("/starships", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -184,6 +201,7 @@ app.delete("/starships", function(req, res){
 	});
 });
 
+//route for adding credits
 app.put("/credits", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -200,6 +218,7 @@ app.put("/credits", function(req, res){
 	});
 });
 
+//route for subtracting credits
 app.put("/subtractcredits", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -216,6 +235,7 @@ app.put("/subtractcredits", function(req, res){
 	});
 });
 
+//render the tatooine page
 app.get("/tatooine", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -225,6 +245,7 @@ app.get("/tatooine", function(req, res){
 	});
 });
 
+//render the endor page 
 app.get("/endor", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -234,6 +255,7 @@ app.get("/endor", function(req, res){
 	});
 });
 
+//render the hoth page
 app.get("/hoth", function(req, res){
 	var user = req.user;
 	db.stat.find({
@@ -243,6 +265,7 @@ app.get("/hoth", function(req, res){
 	});
 });
 
+//render the kashyyyk page
 app.get("/kashyyyk", function(req, res){
 	var user = req.user;
 	db.stat.find({

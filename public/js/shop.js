@@ -1,8 +1,7 @@
 $(".buyFalcon").click(function(e){ 
 	$.ajax({ 
-		url: "/subtractcredits",
-		data: {amount:0}, 
-		method: "PUT"
+		url: "/getStats",
+		method: "GET"
 	}).done(function(data){ 
 		var userCredits = data.credits;
 		var userStarships = data.starships;
@@ -43,9 +42,8 @@ $(".buyFalcon").click(function(e){
 $("#sellFalcon").click(function(e){
 	console.log("sell falcon clicked");
 	$.ajax({
-		url: "/subtractcredits",
-		data: {},
-		method: "PUT"
+		url: "/getStats",
+		method: "GET"
 	}).done(function(data){
 		var userStarships = data.starships;
 		if (userStarships.indexOf("Millenium Falcon") !== -1) {
@@ -75,9 +73,8 @@ $("#sellFalcon").click(function(e){
 
 $(".buyxwing").click(function(e){ 
 	$.ajax({ 
-		url: "/subtractcredits",
-		data: {amount:0}, 
-		method: "PUT"
+		url: "/getStats",
+		method: "GET"
 	}).done(function(data){ 
 		var userCredits = data.credits;
 		var userStarships = data.starships;
@@ -117,9 +114,8 @@ $(".buyxwing").click(function(e){
 
 $(".buydstar").click(function(e){ 
 	$.ajax({ 
-		url: "/subtractcredits",
-		data: {amount:0}, 
-		method: "PUT"
+		url: "/getStats",
+		method: "GET"
 	}).done(function(data){ 
 		var userCredits = data.credits;
 		var userStarships = data.starships;
