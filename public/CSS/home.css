@@ -1,0 +1,41 @@
+/****************************************************
+        CSS that only applies to the planets on the /home page
+        *****************************************************/
+        .planet {
+            /*background-color: green;*/
+            border-radius: 100%;
+        }
+
+        .planet_pic {
+            height: 100%;
+            width: 100%;
+        }
+
+        .planet3 {
+            height: 250px;
+            width: 275px;
+        }
+
+        .planet2 {
+            height: 180px;
+            width: 200px;
+        }
+
+        .planet1 {
+            height: 120px;
+            width: 150px;
+        }
+
+        .planet0 {
+            height: 75px;
+            width: 100px;
+        }
+
+        .donePlanet {
+            height:60px;
+            width: 60px;
+            border-radius: 100%;
+            background-color: red;
+            display: inline-block;
+            margin-top: -50px;
+        }

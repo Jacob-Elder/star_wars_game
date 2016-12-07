@@ -1,0 +1,68 @@
+/****************************************************
+CSS that only applies to the specific location pages
+*****************************************************/
+.chewy {
+    height: 290px;
+    width: 215px;
+    position: absolute;
+    bottom: 15px;
+    right:120px;
+
+}
+
+        .dialogueBox {
+            height: 250px;
+            width: 30%;
+            text-align: center;
+            display: none;
+        }
+
+        .dialogueBox1 {
+            background-color: red;
+            color: #f2f4f7;
+            float: left;
+            margin-right: 14%;
+            margin-left: 10%;
+            border-radius: 30% 30% 30% 0;
+        }
+
+
+        .dialogueBox2 {
+           background-color: green;
+           float: left;
+           border-radius: 30% 30% 0 30%;
+        }
+
+        .dialogueBox2 button {
+            max-width: 80%;
+        }
+
+
+        /* .character refers to each of the 3 characters */
+        .character {
+            display: inline-block;
+            height: 200px;
+            width: 150px;
+            /*background-color: blue;*/
+            position: absolute;
+            bottom: 5px;
+        }
+
+        .character1 {
+            left: 0px;
+        }
+
+        .character2 {
+            left: 220px;
+            bottom: 30px;
+        }
+
+        .character3 {
+            left:460px;
+            bottom: 60px;
+        }
+
+        .characterPic {
+            height: 100%;
+            width:100%;
+        }

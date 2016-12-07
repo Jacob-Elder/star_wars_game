@@ -1,0 +1,25 @@
+    body {
+            /*background properties*/
+            background-color: black;
+            background: url("/images/death_star_background.jpg") no-repeat center center fixed;
+            background-size: cover;
+            /*background-repeat: no-repeat;*/
+        }
+
+/****************************************************
+        CSS that only applies to the sign in and sign up page
+        *****************************************************/
+    	.firstPages {
+    		/*text properties*/
+    		text-align:center;
+    		color: white;
+    		font-family: Andale Mono,Times New Roman;
+    	}
+
+        input[type="radio"]:checked+span {
+            color: green;
+        }
+
+        input[type="radio"]+span {
+            font-size: 1.5em;
+        }
