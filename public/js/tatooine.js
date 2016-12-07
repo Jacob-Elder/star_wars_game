@@ -11,6 +11,10 @@
 		$(".anakinQuestion21").hide();
 		$(".anakinResponse2").hide();
 		$(".anakinQuestion3").hide();
+		$(".anakinQuestion4").hide();
+		$(".anakinQuestion5").hide();
+		$(".anakinResponse3").hide();
+		$(".anakinQuestion6").hide();
 
 		$(".jawaQuestion1").hide();
 		$(".jawaResponse1").hide();
@@ -18,7 +22,9 @@
 		$(".jawaQuestion21").hide();
 		$(".jawaResponse2").hide();
 		$(".jawaQuestion3").hide();
+		$(".jawaQuestion4").hide();
 		$(".jawaQuestionMoney").hide();
+		$(".jawaQuestion5").hide();
 
 		$('.anakinPic').on("click", function(){
 			$(".dialogueBox").show();
@@ -47,7 +53,7 @@
 			setTimeout(function(){
 				$(".dialogueBox").hide();
 				$(".anakin").hide();
-				$("anakinPic").hide();
+				$(".anakinPic").hide();
 			}, 5000);
 		});
 
@@ -70,6 +76,56 @@
 			}, 5000);
 		});
 
+		$(".anakin_nothing").click(function(e) {
+			$(".anakinQuestion2").hide();
+			$(".anakinResponse2").hide();
+			$(".anakinQuestion4").show();
+			$(".anakinResponse3").show();
+		});
+
+		$(".anakin_accept").click(function(e) {
+			$(".anakinQuestion4").hide();
+			$(".anakinResponse3").hide();
+			$(".anakinQuestion3").show();
+			$.ajax({
+				url: "/credits",
+				data: {amount: 40000},
+				method: "PUT"
+			}).done(function(data){
+				$("#credits").text("credits: " + data.credits);
+			});
+			setTimeout(function(){
+				$(".anakinQuestion3").hide();
+				$(".dialogueBox").hide();
+				$(".anakin").hide();
+				$(".anakinPic").hide();
+			}, 5000);
+		});
+
+		$(".anakin_decline").click(function(e) {
+			$(".anakinQuestion4").hide();
+			$(".anakinResponse3").hide();
+			$(".anakinQuestion5").show();
+			setTimeout(function(){
+				$(".anakinQuestion5").hide();
+				$(".dialogueBox").hide();
+				$(".anakin").hide();
+				$(".anakinPic").hide();
+			}, 5000);
+		});
+
+		$(".anakin_alot").click(function(e) {
+			$(".anakinQuestion2").hide();
+			$(".anakinResponse2").hide();
+			$(".anakinQuestion6").show();
+			setTimeout(function(){
+				$(".anakinQuestion6").hide();
+				$(".dialogueBox").hide();
+				$(".anakin").hide();
+				$(".anakinPic").hide();
+			}, 5000);
+		})
+
 			                                         // Jawa Interaction
 
 			$('.jawaPic').on("click", function(){
@@ -81,8 +137,13 @@
 		$(".jawa_yes").click(function(e){
 			$(".jawaQuestion1").hide();
 			$(".jawaResponse1").hide();
-			$(".jawaQuestion2").show();
-			$(".jawaResponse2").show();
+			$(".jawaQuestion4").show();
+			setTimeout(function(){
+				$(".jawaQuestion4").hide();
+				$(".dialogueBox").hide();
+				$(".jawa").hide();
+				$(".jawaPic").hide();
+			}, 5000);
 		});
 
 		$(".jawa_maybe").click(function(e){
@@ -132,4 +193,24 @@
 				$(".jawaPic").hide();
 			}, 5000);
 		});
+
+		$(".jawa_alot").click(function(e){
+			$(".jawaQuestion2").hide();
+			$(".jawaResponse2").hide();
+			$(".jawaQuestion5").show();
+			$.ajax({
+				url: "/credits",
+				data: {amount: 60000},
+				method: "PUT"
+			}).done(function(data){
+				$("#credits").text("credits: " + data.credits);
+			});
+			setTimeout(function(){
+				$(".jawaQuestion5").hide();
+				$(".dialogueBox").hide();
+				$(".jawaPic").hide();
+			}, 5000);
+		});
+
+
 	});
