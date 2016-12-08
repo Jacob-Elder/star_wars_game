@@ -11,10 +11,11 @@ CSS that only applies to the specific location pages
 }
 
         .dialogueBox {
-            height: 250px;
+            min-height: 250px;
             width: 30%;
             text-align: center;
             display: none;
+            margin-top: 25px;
         }
 
         .dialogueBox1 {
