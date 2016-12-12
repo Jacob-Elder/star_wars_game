@@ -5,6 +5,8 @@ $("#Death_Star").on('click', function(){
 			method: 'GET',
 			success: function(result){
 			 	console.log(result);
+			 	$('#sell').attr('data-ship', 'Death Star');
+			 	$('#sell').attr('data-price', '1000000000000');
          		$(".shipTitle").text(result.name);
          		$("#costInCredits").text("Cost: " + result.cost_in_credits);
          		$("#length").text("Length: " + result.length + " meters");
@@ -21,6 +23,8 @@ $("#Death_Star").on('click', function(){
 			method: 'GET',
 			success: function(result){
 			 	console.log(result);
+			 	$('#sell').attr('data-ship', 'X-Wing');
+			 	$('#sell').attr('data-price', '150000');
          		$(".shipTitle").text(result.name);
          		$("#costInCredits").text("Cost: " + result.cost_in_credits);
          		$("#length").text("Length: " + result.length + " meters");
@@ -37,6 +41,8 @@ $("#Death_Star").on('click', function(){
 			method: 'GET',
 			success: function(result){
 			 	console.log(result);
+			 	$('#sell').attr('data-ship', 'Millenium Falcon');
+			 	$('#sell').attr('data-price', '100000');
          		$(".shipTitle").text(result.name);
          		$("#costInCredits").text("Cost: " + result.cost_in_credits);
          		$("#length").text("Length: " + result.length + " meters");

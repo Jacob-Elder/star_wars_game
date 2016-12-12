@@ -1,5 +1,3 @@
-<script src="/js/endor.js"></script>
-
 <%- include partials/header.ejs %>
 
 								<!-- Dialogue Box 1 -->
@@ -49,7 +47,7 @@
 	<div class="trooper trooperQuestion9">
 		<h5>Scout: </h5>
 		<br>
-		<p>Our sattelite us state of the art. We don't need someone who knows how to work on old run-down ships. Move along and don't come back around here.</p>
+		<p>Our sattelite is state of the art. We don't need someone who knows how to work on old run-down ships. Move along and don't come back around here.</p>
 	</div>
 	<div class="trooper trooperQuestion10">
 		<h5>Scout: </h5>
@@ -64,9 +62,34 @@
 	<div class="trooper trooperQuestion12">
 		<h5>Scout: </h5>
 		<br>
-		<p>I can't believe they heard about that. I will have to warn my other officers to be on the lookout. Hear is 30,000 credits for your help.</p>
+		<p>How'd they figure that out!?!? I will have to warn my other officers to be on the lookout. Hear is 30,000 credits for your help.</p>
 	</div>
-
+                                        <!-- Trooper Questions -->
+    <div class="ewok ewokQuestion1">
+		<h5>Ewok: </h5>
+		<br>
+		<p>You don't look like you're from around here. Whatever you do stay away from the Imperial troopers. They are bad business. You havn't seen them in this area have you?</p>
+	</div>
+	<div class="ewok ewokQuestion2">
+		<h5>Ewok: </h5>
+		<br>
+		<p>Oh no! They usually don't come this far off their base. They might be planning to take over another one of our villages. I must go warn the others.</p>
+	</div>
+	<div class="ewok ewokQuestion3">
+		<h5>Ewok: </h5>
+		<br>
+		<p>We could use a wookie of your size. What would you expect in return?</p>
+	</div>
+	<div class="ewok ewokQuestion4">
+		<h5>Ewok: </h5>
+		<br>
+		<p>Us ewoks are fighting to save our homes and families. If you're just in it for the money, we don't want your help.</p>
+	</div>
+	<div class="ewok ewokQuestion5">
+		<h5>Ewok: </h5>
+		<br>
+		<p>That can be arranged, but not by us ewoks. You will have to go west until you get to the closest major village. One of the vendors there should be able to help you. Here is 20,000 credits for you to buy some ammo. Meet me back at this spot tomorrow morning to discuss our plan of attack.</p>
+	</div>
 
 </div>
 
@@ -74,7 +97,7 @@
 
 <div class="dialogueBox dialogueBox2">
                                          <!-- Trooper Responses -->
-	<div class="anakin trooperResponse1">
+	<div class="trooper trooperResponse1">
 		<h5>Chewbacca:</h5>
 		<br>
 		<button class="btn trooper_lost">Sorry I'm lost. You wouldn't happen to <br>have any spare money to <br>help me to buy a ship would you?</button>
@@ -85,7 +108,7 @@
 		<br>
 		<button class="btn trooper_compliment">You seem to be running an impressive <br>operation. I'd like to help.</button>
 	</div>
-	<div class="anakin trooperResponse2">
+	<div class="trooper trooperResponse2">
 		<h5>Chewbacca:</h5>
 		<br>
 		<button class="btn trooper_displeased">Vader has been displeased with your <br>progress here. If this is going to be an issue <br>I could contact him and let him know <br>you wont let me in.</button>
@@ -94,7 +117,7 @@
 		<button class="btn trooper_advisor">I have just recently been appointed as <br>Vader's advisor for all operations on Endor.</button>
 		<br>
 	</div>
-	<div class="anakin trooperResponse3">
+	<div class="trooper trooperResponse3">
 		<h5>Chewbacca:</h5>
 		<br>
 		<button class="btn trooper_alot">I need 100,000 credits so I can go to the <br>local village and buy some supplies.</button>
@@ -103,7 +126,7 @@
 		<button class="btn trooper_alittle">I will be going to the local <br>village to buy supplies, but money is tight.</button>
 		<br>
 	</div>
-	<div class="anakin trooperResponse4">
+	<div class="trooper trooperResponse4">
 		<h5>Chewbacca:</h5>
 		<br>
 		<button class="btn trooper_handy">I have tons of experience working on <br>starships. Maybe you've heard of <br>the millenium falcon.</button>
@@ -112,13 +135,32 @@
 		<button class="btn trooper_intel">Some local ewoks have been planning <br>to raid your base, and sabotage your <br>sattelite. For some money I could tell <br>you what I know.</button>
 		<br>
 	</div>
-	<div class="anakin trooperResponse5">
+	<div class="trooper trooperResponse5">
 		<h5>Chewbacca:</h5>
 		<br>
 		<button class="btn trooper_money_first">Give me the money first and I'll <br>tell you what I know.</button>
 		<br>
 		<br>
-		<button class="btn trooper_tell">The ewoks know your generators will <br>be down for a couple hours tomorrow <br>night. That is when they are going to <br>strike.</button>
+		<button class="btn trooper_tell">The ewoks know your where your generators' <br>shut off switch is. They are going to attack <br>tommorow night.</button>
+		<br>
+	</div>
+	                              <!-- Ewok Responses -->
+	<div class="ewok ewokResponse1">
+		<h5>Chewbacca:</h5>
+		<br>
+		<button class="btn ewok_lie">I havn't seen any troops. In fact I <br>wouldn't mind helping you fight back <br>against them.</button>
+		<br>
+		<br>
+		<button class="btn ewok_truth">I just talked to a scout trooper. He is <br>probably still close by.</button>
+		<br>
+	</div>
+	<div class="ewok ewokResponse2">
+		<h5>Chewbacca:</h5>
+		<br>
+		<button class="btn ewok_money">I'd be risking my life to help you fight <br>an entire army. 100,000 credits will buy <br>my loyalty.</button>
+		<br>
+		<br>
+		<button class="btn ewok_supplies">I need more ammo for my crossbow, <br>and a lot of it!</button>
 		<br>
 	</div>
 
@@ -133,3 +175,5 @@
 <script src="/js/starships.js"></script>
 
 <script src="/js/shop.js"></script>
+
+<script src="/js/endor.js"></script>

@@ -11,26 +11,11 @@ $(document).ready(function(){
 	$('.character1').css("bottom", "80px");
 	$('.ewokPic').hide();
 
-	$(".trooperQuestion1").hide();
-	$(".trooperResponse1").hide();
-	$(".trooperQuestion2").hide();
-	$(".trooperQuestion3").hide();
-	$(".trooperResponse2").hide();
-	$(".trooperResponse3").hide();
-	$(".trooperResponse4").hide();
-	$(".trooperResponse5").hide();
-	$(".trooperQuestion4").hide();
-	$(".trooperQuestion5").hide();
-	$(".trooperQuestion6").hide();
-	$(".trooperQuestion7").hide();
-	$(".trooperQuestion8").hide();
-	$(".trooperQuestion9").hide();
-	$(".trooperQuestion10").hide();
-	$(".trooperQuestion11").hide();
-	$(".trooperQuestion12").hide();
+	$(".trooper").hide();
+	$(".ewok").hide();
 
 
-
+                                    // Trooper Interaction
 
 	$('.trooperPic').on("click", function(){
 		$(".dialogueBox").show();
@@ -46,6 +31,7 @@ $(document).ready(function(){
 			$(".dialogueBox").hide();
 			$(".trooperPic").hide();
 			$(".ewokPic").show();
+			$(".ewokPic").parent().css('z-index', 10);
 			$(".trooperQuestion2").hide();
 		}, 5000)
 	});
@@ -65,6 +51,7 @@ $(document).ready(function(){
 			$(".dialogueBox").hide();
 			$(".trooperPic").hide();
 			$(".ewokPic").show();
+			$(".ewokPic").parent().css('z-index', 10);
 			$(".trooperQuestion4").hide();
 		}, 8000)
 	});
@@ -91,6 +78,7 @@ $(document).ready(function(){
 			$(".dialogueBox").hide();
 			$(".trooperPic").hide();
 			$(".ewokPic").show();
+			$(".ewokPic").parent().css('z-index', 10);
 			$(".trooperQuestion7").hide();
 		}, 6500)
 	});
@@ -103,6 +91,7 @@ $(document).ready(function(){
 			$(".dialogueBox").hide();
 			$(".trooperPic").hide();
 			$(".ewokPic").show();
+			$(".ewokPic").parent().css('z-index', 10);
 			$(".trooperQuestion6").hide();
 		}, 6500)
 	});
@@ -122,6 +111,7 @@ $(document).ready(function(){
 			$(".dialogueBox").hide();
 			$(".trooperPic").hide();
 			$(".ewokPic").show();
+			$(".ewokPic").parent().css('z-index', 10);
 			$(".trooperQuestion9").hide();
 		}, 6500)
 	});
@@ -141,6 +131,7 @@ $(document).ready(function(){
 			$(".dialogueBox").hide();
 			$(".trooperPic").hide();
 			$(".ewokPic").show();
+			$(".ewokPic").parent().css('z-index', 10);
 			$(".trooperQuestion11").hide();
 		}, 6500)
 	});
@@ -160,8 +151,64 @@ $(document).ready(function(){
 			$(".dialogueBox").hide();
 			$(".trooperPic").hide();
 			$(".ewokPic").show();
+			$(".ewokPic").parent().css('z-index', 10);
 			$(".trooperQuestion12").hide();
 		}, 6500)
 	});
+
+	                                // Ewok Interaction
+
+	    $(".ewokPic").on('click', function() {
+	    	$(".dialogueBox").show();
+			$(".ewokQuestion1").show();
+			$(".ewokResponse1").show();
+	    });
+
+	    $(".ewok_truth").on('click', function() {
+	    	$(".ewokQuestion1").hide();
+			$(".ewokResponse1").hide();
+			$(".ewokQuestion2").show();
+			setTimeout(function(){
+				$(".dialogueBox").hide();
+				$(".ewokPic").hide();
+				$(".ewokQuestion2").hide();
+		}, 6500)
+	    });
+
+	    $(".ewok_lie").on('click', function() {
+	    	$(".ewokQuestion1").hide();
+			$(".ewokResponse1").hide();
+			$(".ewokQuestion3").show();
+			$(".ewokResponse2").show();
+	    });
+
+	    $(".ewok_money").on('click', function() {
+	    	$(".ewokQuestion3").hide();
+			$(".ewokResponse2").hide();
+			$(".ewokQuestion4").show();
+			setTimeout(function(){
+				$(".dialogueBox").hide();
+				$(".ewokPic").hide();
+				$(".ewokQuestion4").hide();
+			}, 6500)
+	    });
+
+	    $(".ewok_supplies").on('click', function() {
+	    	$(".ewokQuestion3").hide();
+			$(".ewokResponse2").hide();
+			$(".ewokQuestion5").show();
+			$.ajax({
+				url: "/credits",
+				data: {amount: 20000},
+				method: "PUT"
+			}).done(function(data){
+				$("#credits").text("credits: " + data.credits);
+			});
+			setTimeout(function(){
+				$(".dialogueBox").hide();
+				$(".ewokPic").hide();
+				$(".ewokQuestion5").hide();
+			}, 10000)
+		});
 
 });

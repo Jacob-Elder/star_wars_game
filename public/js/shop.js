@@ -39,25 +39,29 @@ $(".buyFalcon").click(function(e){
 	}); 
 });
 
-$("#sellFalcon").click(function(e){
+$("#sell").click(function(e){
 	console.log("sell falcon clicked");
+	var ship = $(this).attr("data-ship");
+	var price = $(this).attr("data-price");
+	price = parseInt(price);
+	console.log("ship: ", ship);
 	$.ajax({
 		url: "/getStats",
 		method: "GET"
 	}).done(function(data){
 		var userStarships = data.starships;
-		if (userStarships.indexOf("Millenium Falcon") !== -1) {
+		if (userStarships.indexOf(ship) !== -1) {
 			$.ajax({
 				url: "/credits",
-				data: {amount:100000},
+				data: {amount:price},
 				method: "PUT"
 			}).done(function(data){
 				$("#credits").text("credits: " + data.credits);
 				$(".yourCredits").text("Your credits: " + data.credits);
 			})
 			$.ajax({
-				url: "/starships",
-				data: {},
+				url: "/sell-starship",
+				data: {ship: ship},
 				method: "DELETE"
 			}).done(function(data){
 				$("#credits").text("credits: " + data.credits);

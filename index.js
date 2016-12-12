@@ -186,13 +186,15 @@ app.put("/planets", function(req, res){
 });
 
 //route for deleting starships when the user sells them
-app.delete("/starships", function(req, res){
+app.delete("/sell-starship", function(req, res){
 	var user = req.user;
+	var ship = req.body.ship;
+	console.log(ship);
 	db.stat.find({
 		where: {userId: user.id, savename: currentSaveFile}
 	}).then(function(stat){
 		var array = stat.starships.split(",");
-		var searchTerm = "Millenium Falcon";
+		var searchTerm = ship;
 		stat.updateAttributes({
 			starships: stat.starships = (array.filter(function(i){return i !== searchTerm})).join(",")
 		}).then(function(updatedStat){
