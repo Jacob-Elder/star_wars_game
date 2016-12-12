@@ -249,9 +249,9 @@ app.get("/tatooine", function(req, res){
 app.get("/endor", function(req, res){
 	var user = req.user;
 	db.stat.find({
-		where: {userId: user.id, id: currentStatId}
+		where: {userId: user.id, savename: currentSaveFile}
 	}).then(function(stat){
-		res.render("endor", {user:user, stat:stat});
+		res.render("endor", {user:user, stat: stat});
 	});
 });
 
@@ -259,7 +259,7 @@ app.get("/endor", function(req, res){
 app.get("/hoth", function(req, res){
 	var user = req.user;
 	db.stat.find({
-		where: {userId: user.id, id: currentStatId}
+		where: {userId: user.id, savename: currentSaveFile}
 	}).then(function(stat){
 		res.render("hoth", {user:user, stat: stat});
 	});
@@ -269,7 +269,7 @@ app.get("/hoth", function(req, res){
 app.get("/kashyyyk", function(req, res){
 	var user = req.user;
 	db.stat.find({
-		where: {userId: user.id, id: currentStatId}
+		where: {userId: user.id, savename: currentSaveFile}
 	}).then(function(stat){
 		res.render("kashyyyk", {user:user, stat: stat});
 	});
