@@ -16,10 +16,34 @@
     		font-family: Andale Mono,Times New Roman;
     	}
 
+        .firstPages h2 {
+            margin-bottom: 25px;
+        }
+
         input[type="radio"]:checked+span {
             color: green;
         }
 
         input[type="radio"]+span {
+            font-size: 1.5em;
+        }
+
+        input[type="text"] {
+            width: 50%;
+            text-align: center;
+            margin: 5px auto;
+        }
+        input[type="email"] {
+            width: 50%;
+            text-align: center;
+            margin: 5px auto;
+        }
+        input[type="password"] {
+            width: 50%;
+            text-align: center;
+            margin: 5px auto;
+        }
+
+        label {
             font-size: 1.5em;
         }
